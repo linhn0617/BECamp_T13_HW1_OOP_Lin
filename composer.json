@@ -1,0 +1,16 @@
+{
+    "name": "lin/be-camp_t13_hw1_oop_lin",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Classes\\": "Classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "linhn0617",
+            "email": "yyo833782@gmail.com"
+        }
+    ],
+    "require": {}
+}
