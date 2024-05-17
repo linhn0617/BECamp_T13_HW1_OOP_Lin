@@ -30,12 +30,22 @@ class Mysql
     }
 
     //將玩家遊戲紀錄儲存進資料庫
-    public function savePlayerRecord()
+    public function savePlayerRecord($name, $stage, $startTime, $endTime)
     {
+        $statement = $this->connection->prepare("INSERT INTO record(name,stage,start_time,end_time)VALUES(:name,:stage,:start_time,:end_time)");
+        $statement->bindParam(':name', $name);
+        $statement->bindParam(':stage', $stage);
+        $statement->bindParam(':start_time', $startTime);
+        $statement->bindParam(':end_time', $endTime);
+        $statement->execute();
     }
 
     //從資料庫中取出玩家遊戲紀錄
-    public function getPlayerRecord()
+    public function getPlayerRecord($name)
     {
+        $statement = $this->connection->prepare("SELECT FROM record WHERE name = :name");
+        $statement->bindParam(':name', $name);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
