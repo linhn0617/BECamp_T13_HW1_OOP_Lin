@@ -14,10 +14,10 @@ class Player extends Character
     public $rivivalFactor;
 
     //魔法攻擊
-    public function magicalAttack($attacker,$target)
+    public function magicalAttack($attacker, $target)
     {
         $damage = $attacker->magicalAttack - $target->magicalDefense;
-        if($damage < 0){
+        if ($damage < 0) {
             $damage = 0;
         }
         $target->healthPoint -= $damage;
@@ -47,34 +47,35 @@ class Player extends Character
     public function selectCareer()
     {
         $validCareer = false;
-        while(!$validCareer){
+        while (!$validCareer) {
             echo "請輸入數字以選擇職業(1.劍士 2.法師): \n";
             $chosenCareer = readline();
+            $chosenCareer = (int)$chosenCareer;
 
-            if($chosenCareer === "1"){
+            if ($chosenCareer === 1) {
                 $this->career = "劍士";
                 $validCareer = true;
-            }elseif($chosenCareer === "2"){
+            } elseif ($chosenCareer === 2) {
                 $this->career = "法師";
                 $validCareer = true;
-            }else{
+            } else {
                 echo "請輸入1或2以選擇職業！\n";
                 $validCareer = false;
             }
-        } 
+        }
     }
 
     //根據選擇的職業設置玩家基本屬性
     public function setPlayerAttributesByCareer($selectedCareer)
     {
-        if($selectedCareer === "劍士"){
+        if ($selectedCareer === "劍士") {
             $this->healthPoint = 100;
             $this->magicPoint = 20;
             $this->physicalAttack = 30;
             $this->magicalAttack = 10;
             $this->physicalDefense = 35;
             $this->magicalDefense = 20;
-        }elseif($selectedCareer === "法師"){
+        } elseif ($selectedCareer === "法師") {
             $this->healthPoint = 90;
             $this->magicPoint = 40;
             $this->physicalAttack = 10;
@@ -85,7 +86,7 @@ class Player extends Character
     }
     //顯示玩家基本屬性
     public function displayPlayerAttributes()
-    {  
+    {
         View::clearScreen();
         echo "   角色屬性    \n";
         echo "===============\n";
@@ -109,45 +110,42 @@ class Player extends Character
         readline("點擊enter鍵以進行點數分配");
         View::clearScreen();
         $remainingPoints = 10;
-        while($remainingPoints >0)
-        {
+        while ($remainingPoints > 0) {
             echo "剩餘點數：$remainingPoints\n";
             echo "請選擇要分配的屬性(1.物理攻擊力 2.魔法攻擊力 3.物理防禦力 4.魔法防禦力 5.幸運值)：\n";
             $chosenAttribute = readline();
             $chosenAttribute = (int)$chosenAttribute;
-            if($chosenAttribute === 1){
+            if ($chosenAttribute === 1) {
                 $this->physicalAttack++;
                 $remainingPoints--;
-            }elseif($chosenAttribute === 2){
+            } elseif ($chosenAttribute === 2) {
                 $this->magicalAttack++;
                 $remainingPoints--;
-            }elseif($chosenAttribute === 3){
+            } elseif ($chosenAttribute === 3) {
                 $this->physicalDefense++;
                 $remainingPoints--;
-            }elseif($chosenAttribute === 4){
+            } elseif ($chosenAttribute === 4) {
                 $this->magicalDefense++;
                 $remainingPoints--;
-            }elseif($chosenAttribute === 5){
+            } elseif ($chosenAttribute === 5) {
                 $this->luckPoint++;
                 $remainingPoints--;
-            }else{
+            } else {
                 echo "無效的輸入！請重新選擇！\n";
             }
             View::clearScreen();
         }
-
     }
 
     //根據幸運值決定是否滿血復活
     public function isFullHealthPointRivival()
     {
-        $this->rivivalFactor = rand(1,100);
-        return $this->luckPoint*10 > ($this->rivivalFactor);
+        $this->rivivalFactor = rand(1, 100);
+        return $this->luckPoint * 10 > ($this->rivivalFactor);
     }
 
     //通關後更新玩家屬性
     public function updatePlayerAttributes()
     {
-
     }
 }

@@ -1,8 +1,9 @@
 <?php
+
 namespace Classes;
 
 class Character
-{   
+{
     public $name;
     public $healthPoint;
     public $physicalAttack;
@@ -13,7 +14,7 @@ class Character
     public function physicalAttack($attacker, $target)
     {
         $damage = $attacker->physicalAttack - $target->physicalDefense;
-        if($damage < 0){
+        if ($damage < 0) {
             $damage = 0;
         }
         $target->healthPoint -= $damage;
@@ -24,7 +25,4 @@ class Character
         }
         echo "{$target->name} 的剩餘 HP：{$target->healthPoint}\n";
     }
-
 }
-
-

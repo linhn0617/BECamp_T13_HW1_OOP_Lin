@@ -9,8 +9,9 @@ class Mysql
 {
     public $connection;
 
-    
-    public function __construct(){
+
+    public function __construct()
+    {
         $servername = "localhost";
         $username = "username";
         $password = "P@ssword123";
@@ -26,20 +27,15 @@ class Mysql
     //從資料庫中取出已建好的怪物資料
     public function getEnemyData()
     {
-        
     }
 
     //將玩家遊戲紀錄儲存進資料庫
     public function savePlayerRecord()
     {
-
     }
 
     //從資料庫中取出玩家遊戲紀錄
     public function getPlayerRecord()
     {
-
     }
 }
-
-?>

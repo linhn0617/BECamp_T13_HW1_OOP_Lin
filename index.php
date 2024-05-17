@@ -10,32 +10,22 @@ use Classes\View;
 $mysql = new Mysql();
 $player = new Player();
 
-while(true){
+while (true) {
     View::clearScreen();
     View::showMenu();
     $choice = readline();
     $choice = (int)$choice;
 
-    if ($choice === 1)
-    {
-        
-    }elseif($choice === 2)
-    {
+    if ($choice === 1) {
+    } elseif ($choice === 2) {
         $player->createNewPlayer();
-    }elseif($choice === 3)
-    {
-
-    }elseif($choice === 4)
-    {
+    } elseif ($choice === 3) {
+    } elseif ($choice === 4) {
         exit;
-    }else
-    {
+    } else {
         echo "請輸入1/2/3以進行選擇!\n";
         sleep(2);
         View::clearScreen();
         continue;
     }
 }
-
-
-?>

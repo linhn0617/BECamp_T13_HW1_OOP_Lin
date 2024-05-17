@@ -1,4 +1,5 @@
 <?php
+
 namespace Classes;
 
 class View
@@ -17,13 +18,10 @@ class View
     public static function clearScreen()
     {
         echo "\033[2J\033[H";
-    } 
+    }
 
     //開始遊戲
     public function startGame()
     {
-
     }
-
-
 }
