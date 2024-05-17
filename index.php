@@ -8,19 +8,20 @@ use Classes\Enemy;
 use Classes\View;
 
 $mysql = new Mysql();
+$player = new Player();
 
 while(true){
-
+    View::clearScreen();
     View::showMenu();
     $choice = readline();
     $choice = (int)$choice;
 
     if ($choice === 1)
     {
-
+        
     }elseif($choice === 2)
     {
-
+        $player->createNewPlayer();
     }elseif($choice === 3)
     {
 
