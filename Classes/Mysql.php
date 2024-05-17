@@ -26,11 +26,11 @@ class Mysql
     //從資料庫中取出已建好的怪物資料
     public function getEnemyData()
     {
-
+        
     }
 
     //將玩家遊戲紀錄儲存進資料庫
-    public function savePlayerData()
+    public function savePlayerRecord()
     {
 
     }
