@@ -14,14 +14,14 @@ class Player extends Character
     public $rivivalFactor;
 
     //魔法攻擊
-    public function magicalAttack($attacker, $target)
+    public function magicalAttack(Character $target)
     {
-        $damage = $attacker->magicalAttack - $target->magicalDefense;
+        $damage = $this->magicalAttack - $target->magicalDefense;
         if ($damage < 0) {
             $damage = 0;
         }
         $target->healthPoint -= $damage;
-        echo "{$attacker->name} 對 {$target->name} 造成 {$damage} 點傷害\n";
+        echo "{$this->name} 對 {$target->name} 造成 {$damage} 點傷害\n";
         //血量不為負數，若血量小於0時設為0
         if ($target->healthPoint < 0) {
             $target->healthPoint = 0;
@@ -60,7 +60,6 @@ class Player extends Character
                 $validCareer = true;
             } else {
                 echo "請輸入1或2以選擇職業！\n";
-                $validCareer = false;
             }
         }
     }
