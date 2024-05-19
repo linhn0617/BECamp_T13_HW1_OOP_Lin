@@ -2,7 +2,7 @@
 require 'vendor/autoload.php';
 
 use Classes\Mysql;
-use classes\Character;
+use Classes\Character;
 use Classes\Player;
 use Classes\Enemy;
 use Classes\View;
