@@ -11,6 +11,7 @@ class Player extends Character
     public $magicalAttack;
     public $luckPoint = 0;
     public $level = 1;
+    public $maxHealthPoint;
     public $rivivalFactor;
 
     //魔法攻擊
@@ -29,6 +30,20 @@ class Player extends Character
         echo "{$target->name} 的剩餘 HP：{$target->healthPoint}\n";
     }
 
+    //確認是否已建立玩家角色
+    public function ensurePlayerCreated()
+    {
+        View::clearScreen();
+        if (!$this->name) {
+            echo "尚未創建角色，請先建立角色以開始遊戲！\n";
+            readline("點擊 enter 鍵以建立角色...");
+            $this->createNewPlayer();
+            return false; // 玩家角色尚未創建
+        }
+        return true; // 玩家角色已創建
+    }
+
+
     //建立新玩家角色
     public function createNewPlayer()
     {
@@ -37,6 +52,7 @@ class Player extends Character
         $this->name = readline();
         $this->selectCareer();
         $this->setPlayerAttributesByCareer($this->career);
+        $this->maxHealthPoint = $this->healthPoint;
         $this->displayPlayerAttributes();
         $this->allocateAttributePoints();
         $this->displayPlayerAttributes();
@@ -143,8 +159,51 @@ class Player extends Character
         return $this->luckPoint * 10 > ($this->rivivalFactor);
     }
 
-    //通關後更新玩家屬性
-    public function updatePlayerAttributes()
+    //玩家擊敗敵人後獲得經驗值
+    public function gainExperience($exp)
     {
+        $this->experiencePoint += $exp;
+        echo "{$this->name} 獲得了 {$exp} 點經驗值！\n";
+
+        //累計經驗值超過70就升1等
+        while ($this->experiencePoint >= 70) {
+            $this->levelUp();
+            $this->experiencePoint -= 70;
+        }
+    }
+
+    //升等調整屬性
+    private function levelUp()
+    {
+        $this->level++;
+        echo "{$this->name} 升級了！現在等級為 {$this->level}。\n";
+        $this->maxHealthPoint += 10;
+        $this->restoreHealth();
+
+        $updatedAttributes = [
+            '等級' => $this->level,
+            '血量' => $this->maxHealthPoint
+        ];
+        if ($this->career === "劍士") {
+            $this->physicalAttack += 5;
+            $this->physicalDefense += 5;
+            $updatedAttributes['物理攻擊力'] = $this->physicalAttack;
+            $updatedAttributes['物理防禦力'] = $this->physicalDefense;
+        } else {
+            $this->magicalAttack += 5;
+            $this->magicalDefense += 5;
+            $updatedAttributes['魔法攻擊力'] = $this->magicalAttack;
+            $updatedAttributes['魔法防禦力'] = $this->magicalDefense;
+        }
+
+        echo "等級提升後屬性變更如下：\n";
+        foreach ($updatedAttributes as $key => $value) {
+            echo "$key: $value\n";
+        }
+    }
+    //通關後恢復滿血
+    public function restoreHealth()
+    {
+        $this->healthPoint = $this->maxHealthPoint;
     }
 }
