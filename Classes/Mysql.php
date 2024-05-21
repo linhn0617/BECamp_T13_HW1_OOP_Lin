@@ -36,11 +36,10 @@ class Mysql
     }
 
     //從資料庫中取出玩家遊戲紀錄
-    public function getPlayerRecord($name)
+    public function getPlayersRecord()
     {
-        $statement = $this->connection->prepare("SELECT FROM record WHERE name = :name");
-        $statement->bindParam(':name', $name);
+        $statement = $this->connection->prepare("SELECT * FROM record ");
         $statement->execute();
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
