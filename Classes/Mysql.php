@@ -12,12 +12,16 @@ class Mysql
 
     public function __construct()
     {
-        $servername = "localhost";
-        $username = "username";
-        $password = "P@ssword123";
+        //$servername = "localhost";
+        //$username = "username";
+        //$password = "P@ssword123";
+        $servername = $_ENV['DB_HOST'];
+        $username = $_ENV['DB_USERNAME'];
+        $password = $_ENV['DB_PASSWORD'];
+        $database = $_ENV['DB_DATABASE'];
 
         try {
-            $this->connection = new PDO("mysql:host=$servername;dbname=battle_game", $username, $password);
+            $this->connection = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "資料庫連接失敗: " . $e->getMessage();

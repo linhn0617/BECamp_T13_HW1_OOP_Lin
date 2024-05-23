@@ -1,6 +1,12 @@
 <?php
 require 'vendor/autoload.php';
 
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 use Classes\Mysql;
 use Classes\Character;
 use Classes\Player;
@@ -10,13 +16,12 @@ use Classes\View;
 $mysql = new Mysql();
 $player = new Player();
 $view = new View();
-$stage = 1;
+
 
 while (true) {
     View::clearScreen();
     View::showMenu();
-    $choice = readline();
-    $choice = (int)$choice;
+    $choice = (int)readline();
 
     if ($choice === 1) {
         //確認角色是否已建立
@@ -24,6 +29,8 @@ while (true) {
             continue;
         }
         $startTime = date('Y-m-d H:i:s');
+        $stage = 1;
+
         while ($stage <= 5) {
             View::clearScreen();
             $enemy = new Enemy($stage);
